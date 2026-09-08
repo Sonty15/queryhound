@@ -1,0 +1,7 @@
+{
+  "name": "queryhound",
+  "description": "Trace a running MySQL query from SHOW FULL PROCESSLIST back to the repo, file, and line that issued it, explain what it does, and flag SQL quality issues.",
+  "version": "0.1.0",
+  "license": "MIT",
+  "keywords": ["mysql", "sql", "processlist", "debugging", "code-search"]
+}
