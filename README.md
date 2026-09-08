@@ -31,8 +31,9 @@ never committed.
 
 ## Usage
 
-Paste the output of `SHOW FULL PROCESSLIST` and invoke `/queryhound`.
-QueryHound will:
+Paste the output of `SHOW FULL PROCESSLIST` and invoke `/queryhound:queryhound`
+(plugin skills are namespaced as `plugin-name:skill-name`, even when the skill
+shares the plugin's name). QueryHound will:
 
 1. Make sure each configured repo is on `main`/`master` and up to date,
    skipping (and reporting) any repo that isn't
