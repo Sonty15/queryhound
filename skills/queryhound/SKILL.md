@@ -9,6 +9,16 @@ Given output from `SHOW FULL PROCESSLIST` and a `repos.yaml` config, find which
 configured repo (and file/line) issued each running query, explain what it
 does, and flag whether it's a well-written query.
 
+## Language
+
+Match the report's language to the user's invocation: if the text the user
+typed to invoke QueryHound (their message, including any `/queryhound`
+arguments) contains any Thai script, write the whole report in Thai; if it
+contains no Thai at all, write it in English. Keep SQL, identifiers, file
+paths, and the section headers/labels from §5's template (`Origin`, `What it
+does`, `Quality`, etc.) as-is either way — translate the prose around them,
+not the template's own structure.
+
 ## 1. Load config
 
 Look for `repos.yaml` in the current working directory (or a path the user
