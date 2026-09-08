@@ -49,12 +49,31 @@ Only if both checks pass:
 git pull
 ```
 
-If `git pull` itself fails (e.g. "no tracking information" because the repo
-has no remote configured, no network access, or a diverged branch) — this is
-**not** a reason to skip the repo. The branch/dirty checks above are what
-determine searchability; a failed pull just means you search whatever local
-state is already checked out. Do not report this repo under "Repos skipped
-during prep" on account of a pull failure alone.
+If `git pull` fails for a reason that provably never touches the working
+tree — no upstream/tracking branch configured ("no tracking information"),
+or no network access to reach the remote — that alone is **not** a reason to
+skip the repo. Search whatever local state is already checked out.
+
+Any other pull failure (most importantly a diverged branch, where `git pull`
+attempts a merge) can leave the working tree altered — conflict markers
+written into files, an in-progress merge (`MERGE_HEAD` present, unmerged
+paths) — even though the dirty check above already passed *before* the pull
+ran. In that case, re-run `git status --porcelain` right after the failed
+pull:
+
+```bash
+git status --porcelain
+```
+
+- If it now prints anything, **skip this repo**. Reason:
+  `"uncommitted changes present"` — same as the ordinary dirty check; a
+  merge attempt is not an exception to "never search a repo whose contents
+  were just modified to make it searchable."
+- Only if it's still empty is the repo searchable using its local state.
+
+Either way, do not report a repo under "Repos skipped during prep" solely
+because `git pull` returned a non-zero exit code — only report it if the
+working tree is actually dirty or the branch is wrong.
 
 Repos that fail either check are never searched — never `git checkout`,
 `stash`, or otherwise modify a repo to make it searchable. Skipped repos
