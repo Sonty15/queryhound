@@ -49,6 +49,13 @@ Only if both checks pass:
 git pull
 ```
 
+If `git pull` itself fails (e.g. "no tracking information" because the repo
+has no remote configured, no network access, or a diverged branch) — this is
+**not** a reason to skip the repo. The branch/dirty checks above are what
+determine searchability; a failed pull just means you search whatever local
+state is already checked out. Do not report this repo under "Repos skipped
+during prep" on account of a pull failure alone.
+
 Repos that fail either check are never searched — never `git checkout`,
 `stash`, or otherwise modify a repo to make it searchable. Skipped repos
 still appear in the final report, name + reason, so the user knows the
