@@ -1,0 +1,8 @@
++-----+------+---------------+------+---------+------+-----------+-----------------------------------------------------------------------------------------------------+
+| Id  | User | Host          | db   | Command | Time | State     | Info                                                                                                    |
++-----+------+---------------+------+---------+------+-----------+-----------------------------------------------------------------------------------------------------+
+| 101 | app  | 10.0.0.5:5522 | shop | Query   | 2    | executing | SELECT id, customer_id, total, created_at FROM orders WHERE status = 'pending' ORDER BY created_at DESC |
+| 102 | app  | 10.0.0.6:5523 | shop | Query   | 0    | executing | SELECT id, customer_id, total, created_at FROM orders WHERE customer_id = 42 AND status = 'pending'     |
+| 103 | app  | 10.0.0.7:5524 | shop | Query   | 5    | executing | SELECT * FROM invoices WHERE region = 'th'                                                              |
+| 104 | root | localhost     | NULL | Sleep   | 12   |           | NULL                                                                                                     |
++-----+------+---------------+------+---------+------+-----------+-----------------------------------------------------------------------------------------------------+
